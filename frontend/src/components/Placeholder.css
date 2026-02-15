@@ -1,0 +1,75 @@
+.placeholder-section {
+  padding: 0 40px 100px 40px;
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.placeholder-section .container {
+  max-width: 1400px;
+  margin: -1000px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  height: 800px;
+  width: 90%;
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.placeholder-top {
+  height: 50%;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+  border-radius: 12px 12px 0 0;
+  position: relative;
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.placeholder-bottom {
+  height: 50%;
+  width: 100%;
+  padding: 80px 40px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-box p {
+  font-size: 48px;
+  font-weight: 900;
+  color: #000000;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .placeholder-section {
+    padding: 60px 20px;
+  }
+
+  .placeholder-box {
+    padding: 60px 20px;
+  }
+
+  .placeholder-box p {
+    font-size: 18px;
+  }
+}
