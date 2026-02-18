@@ -1,5 +1,25 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
+import secrets
+
+
+class User(AbstractUser):
+    email = models.EmailField(unique=True, verbose_name='Email')
+    is_email_verified = models.BooleanField(default=False, verbose_name='Email подтвержден')
+    email_verification_token = models.CharField(max_length=100, blank=True, null=True, verbose_name='Токен подтверждения')
+    email_verification_sent_at = models.DateTimeField(blank=True, null=True, verbose_name='Время отправки письма')
+    
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+    
+    def generate_email_verification_token(self):
+        token = secrets.token_urlsafe(32)
+        self.email_verification_token = token
+        self.email_verification_sent_at = timezone.now()
+        self.save()
+        return token
 
 
 class News(models.Model):

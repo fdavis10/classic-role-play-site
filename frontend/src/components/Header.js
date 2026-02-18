@@ -1,8 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { getAuthToken } from '../utils/api';
 import './Header.css';
 
 const Header = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = getAuthToken();
+      setIsAuthenticated(!!token);
+    };
+
+    checkAuth();
+    
+    // Слушаем изменения в localStorage (для других вкладок)
+    const handleStorageChange = () => {
+      checkAuth();
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Также проверяем при фокусе окна (на случай если токен был изменен в другой вкладке)
+    window.addEventListener('focus', checkAuth);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('focus', checkAuth);
+    };
+  }, [location]); // Проверяем при изменении роута
+
   return (
     <header className="header">
       <div className="header-container">
@@ -35,11 +63,19 @@ const Header = () => {
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
             </a>
-            <Link to="/login" className="user-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-              </svg>
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/dashboard" className="user-icon" title="Личный кабинет">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </Link>
+            ) : (
+              <Link to="/login" className="user-icon" title="Войти">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </Link>
+            )}
           </div>
         </div>
       </div>
