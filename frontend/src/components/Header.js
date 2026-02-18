@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
@@ -6,13 +7,13 @@ const Header = () => {
     <header className="header">
       <div className="header-container">
         <div className="header-left">
-          <div className="logo-icon">
+          <Link to="/" className="logo-icon">
             <span className="logo-s">S</span>
-          </div>
+          </Link>
           <nav className="nav-links">
-            <a href="#home" className="nav-link">Главная</a>
+            <Link to="/" className="nav-link">Главная</Link>
             <a href="#forum" className="nav-link">Форум</a>
-            <a href="#store" className="nav-link">Магазин</a>
+            <Link to="/shop" className="nav-link">Магазин</Link>
             <a href="#rules" className="nav-link">Правила</a>
             <a href="#lsc" className="nav-link">LSC:ES</a>
           </nav>
@@ -34,11 +35,11 @@ const Header = () => {
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
             </a>
-            <div className="user-icon">
+            <Link to="/login" className="user-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
               </svg>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

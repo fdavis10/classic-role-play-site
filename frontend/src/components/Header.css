@@ -36,6 +36,13 @@
   align-items: center;
   justify-content: center;
   border: 2px solid #ff6b35;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.logo-icon:hover {
+  border-color: #ff8555;
+  transform: scale(1.05);
 }
 
 .logo-s {
@@ -58,6 +65,7 @@
   font-weight: 500;
   font-size: 14px;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .nav-link:hover {
@@ -107,6 +115,8 @@
   justify-content: center;
   color: #ffffff;
   transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .user-icon:hover {
